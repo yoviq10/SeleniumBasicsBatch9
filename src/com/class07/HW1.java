@@ -24,23 +24,31 @@ public class HW1 {
         System.setProperty("webdriver.chrome.driver", "src/driver/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get(url); //navigating tot url
-        String mainPageWindowHandle = driver.getWindowHandle();
-        WebElement newTabButton= driver.findElement(By.id("tabButton"));
-       newTabButton.click();
-       WebElement samplePgText= driver.findElement(By.id("sampleHeading"));
-
-        Set<String> allWindowHandles= driver.getWindowHandles();
-        System.out.println(allWindowHandles);
-        Iterator<String> it= allWindowHandles.iterator();
-        mainPageWindowHandle= it.next();
-
-        String childHandle=it.next();
-        System.out.println(childHandle);
-        Thread.sleep(2000);
-        driver.switchTo().window(mainPageWindowHandle);
-
-
-
+        String mainPage = driver.getWindowHandle();
+        System.out.println(mainPage);
+        WebElement newTab = driver.findElement(By.xpath("//button[@id='tabButton']"));
+        WebElement newWindow = driver.findElement(By.xpath("//button[@id='windowButton']"));
+        WebElement NewWindowMessage = driver.findElement(By.id("messageWindowButton"));
+        newTab.click();
+        newWindow.click();
+        NewWindowMessage.click();
+        Set<String> textTabs = driver.getWindowHandles();
+        System.out.println(textTabs.size());
+        Iterator<String> iterate = textTabs.iterator();
+        System.out.println(textTabs);
+        while (iterate.hasNext()) {
+            String x = iterate.next();
+            if (!x.equals(mainPage)) {
+                driver.switchTo().window(x);
+                System.out.println(driver.getTitle());
+            }
+        }
+        driver.switchTo().window(mainPage);
+        WebElement titleDispaly = driver.findElement(By.xpath("//*[@id=\"app\"]/header/a/img"));
+        titleDispaly.isDisplayed();
+        System.out.println(titleDispaly);
     }
-
 }
+
+
+
