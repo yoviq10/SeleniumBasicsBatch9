@@ -28,7 +28,7 @@ public class SimpleWindowHandling {
         Iterator<String> it= allWindowHandles.iterator(); //Sting because handles are unique
        mainPageHandle= it.next(); //Stepping FORWARD & getting main pg, re-assigning 1 Handle Manually ..the next step is my main page handle..everytime it iterates will start from main pg
 
-        String childHandle=it.next();//stepped FORWARD AGAIN & getting child page CDwindow
+        String childHandle=it.next();//stepped FORWARD AGAIN & getting child page CD window, not switching anywhere!!
         System.out.println(childHandle);
         Thread.sleep(2000);
         driver.switchTo().window(mainPageHandle); //inserting unique handle & switching back to main pg/parent window
